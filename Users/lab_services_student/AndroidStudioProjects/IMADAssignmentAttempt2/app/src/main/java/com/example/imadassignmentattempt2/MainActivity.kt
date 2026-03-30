@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         var edtTimeOfDay = findViewById<EditText>(R.id.edtTimeOfDay)
         val btnNext = findViewById<Button>(R.id.btnNext)
         val btnLeave = findViewById<Button>(R.id.btnLeave)
+        val btnClear = findViewById<Button>(R.id.btnClear)
 
         btnNext.setOnClickListener {
             val name = edtEnterName.text.toString()
@@ -41,6 +42,13 @@ class MainActivity : AppCompatActivity() {
         }
         //https://github.com/liehanels/MultiScreenApp/blob/master/app/src/main/java/com/example/multiscreenapp/MainActivity.kt
         //reference for this code
+
+        btnClear.setOnClickListener {
+            edtEnterName.text.clear()
+            edtTimeOfDay.text.clear()
+        }
+
+
 
 
 
