@@ -70,7 +70,10 @@ class SuggestionActivity : AppCompatActivity() {
                     "Watch a movie with family over video call! ",
                     "Leave a thoughtful comment on a friends'post!"
                 )
+            } else {
+                val tvSuggestionDisplay = "Nope! Not a real time! Try something else!"
             }
+
 
 
         }
