@@ -21,13 +21,13 @@ class SuggestionActivity : AppCompatActivity() {
         }
         val name = intent.getStringExtra("name")
         val time = intent.getStringExtra("time")
-        var tvSuggestionDisplay = findViewById<TextView>(R.id.tvSuggestionDisplay)
-        val btnBefore = findViewById<Button>(R.id.btnNext)
+        val tvSuggestionDisplay = findViewById<TextView>(R.id.tvSuggestionDisplay)
+        val btnBack = findViewById<Button>(R.id.btnNext)
         val btnLeave = findViewById<Button>(R.id.btnLeave)
         val btnGetSuggestion = findViewById<Button>(R.id.btnGetSuggestion)
 
 
-        btnBefore.setOnClickListener {
+        btnBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
         }
         btnLeave.setOnClickListener {
