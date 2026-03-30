@@ -1,6 +1,6 @@
 package com.example.imadassignmentattempt2
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -21,57 +21,64 @@ class SuggestionActivity : AppCompatActivity() {
         }
         val name = intent.getStringExtra("name")
         val time = intent.getStringExtra("time")
+
+
         val tvSuggestionDisplay = findViewById<TextView>(R.id.tvSuggestionDisplay)
-        val btnBack = findViewById<Button>(R.id.btnNext)
+        val tvNameWelcome = findViewById<TextView>(R.id.tvNameWelcome)
+        val btnBack = findViewById<Button>(R.id.btnBack)
         val btnLeave = findViewById<Button>(R.id.btnLeave)
         val btnGetSuggestion = findViewById<Button>(R.id.btnGetSuggestion)
 
+        // Display welcome message
+        tvNameWelcome.text = "Welcome, $name!"
+
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            finish() // Goes back to the previous screen (MainActivity)
         }
         btnLeave.setOnClickListener {
-            finish()
+            finishAffinity() // Closes the entire app
         }
-        btnGetSuggestion.setOnClickListener {
-            if (time == "Morning") {
-                val tvSuggestionDisplay = listOf("Text good morning to your parents!",
+        btnGetSuggestion.setOnClickListener {//the suggestions presented to the user
+            val suggestions = when (time?.lowercase()) {
+                "morning" -> listOf("Text good morning to your parents!",
                     "Video call your siblings and wish them goodluck for the day!",
                     "Send your friends a good morning meme!"
                     )
-            }
-            if (time == "Mid-morning") {
-                val tvSuggestionDisplay = listOf("Call your friends!",
+
+                "Mid morning" -> listOf("Call your friends!",
                     "Share a workout session via video call with your friends!",
                     "Text an old friend saying, 'hi'!"
                 )
-            }
-            if (time == "Afternoon") {
-                val tvSuggestionDisplay = listOf("Share a video with your friends!",
+
+                "Afternoon" -> listOf("Share a video with your friends!",
                     "Share a cat video with your colleagues!",
                     "Text your family a funny meme!"
                 )
-            }
-            if (time == "Afternoon Snack Time") {
-                val tvSuggestionDisplay = listOf("Share a trip to a cafe with friends via video call!",
+
+                "Afternoon Snack time" ->listOf("Share a trip to a cafe with friends via video call!",
                     "Go to the mall and text pixtures of it to your friends!",
                     "Send a fun link to your siblings!"
                 )
-            }
-            if (time == "Dinner") {
-                val tvSuggestionDisplay = listOf("Call your family!",
+
+                "Dinner" -> listOf("Call your family!",
                     "Post about your dinner in a groupchat!",
                     "Share a study session with friends via video call!"
                 )
 
-            }
-            if (time == "night") {
-                val tvSuggestionDisplay = listOf("Say good night to your friends in a text!",
+
+                "Night" -> listOf("Say good night to your friends in a text!",
                     "Watch a movie with family over video call! ",
                     "Leave a thoughtful comment on a friends'post!"
                 )
+                else -> null
+
+            }
+            if (suggestions != null) {
+                // Pick one random suggestion from the list
+                tvSuggestionDisplay.text = "Hey $name! ${suggestions.random()}"
             } else {
-                val tvSuggestionDisplay = "Nope! Not a real time! Try something else!"
+                tvSuggestionDisplay.text = "Not a recognized time (Try: Morning, Afternoon, or night)!"
             }
 
 

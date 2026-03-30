@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //declaring variables
 
         var edtEnterName = findViewById<EditText>(R.id.edtEnterName)
         var edtTimeOfDay = findViewById<EditText>(R.id.edtTimeOfDay)
@@ -27,17 +28,41 @@ class MainActivity : AppCompatActivity() {
         val btnClear = findViewById<Button>(R.id.btnClear)
 
         btnNext.setOnClickListener {
-            val name = edtEnterName.text.toString()
-            val time = edtTimeOfDay.text.toString()
+            //send answer to next page
+            val name = edtEnterName.text.toString().trim()
+            val time = edtTimeOfDay.text.toString().trim()
             val intent = Intent(this, SuggestionActivity::class.java)
-            intent.putExtra("name", name)
-            intent.putExtra("time", time)
-            startActivity(intent)
+
+
+            if (name.any { it.isDigit() }) {
+                //error handling
+                edtEnterName.error = "Please enter your name"
+            }
+            if (name.any { it.isDigit() }) {
+                edtTimeOfDay.error = "Please enter the time of day"
+                if (time.isEmpty()) {
+                    edtEnterName.error = "Please enter your name in words"
+                    return@setOnClickListener
+                }
+
+                if (time.isEmpty()) {
+                    edtTimeOfDay.error = "Please enter the time of day in words"
+                    return@setOnClickListener
+                }
+                else{
+                    val intent = Intent(this, SuggestionActivity::class.java)
+                    intent.putExtra("name", name)
+                    intent.putExtra("time", time)
+                    startActivity(intent)
+                }
+
+                }
         }
         //https://github.com/liehanels/MultiScreenApp/blob/master/app/src/main/java/com/example/multiscreenapp/MainActivity.kt
         //reference for this code
 
         btnLeave.setOnClickListener {
+        //to end the app running
             finish()
         }
         //https://github.com/liehanels/MultiScreenApp/blob/master/app/src/main/java/com/example/multiscreenapp/MainActivity.kt
@@ -46,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         btnClear.setOnClickListener {
             edtEnterName.text.clear()
             edtTimeOfDay.text.clear()
-        }
+        }//to clear what the user entered
 
 
 
