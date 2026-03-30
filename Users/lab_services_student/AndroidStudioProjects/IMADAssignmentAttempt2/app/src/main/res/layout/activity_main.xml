@@ -28,7 +28,7 @@
         app:srcCompat="@drawable/textbox_removebg_preview" />
 
     <Button
-        android:id="@+id/btnBefore"
+        android:id="@+id/btnNext"
         android:layout_width="128dp"
         android:layout_height="60dp"
         android:layout_marginBottom="36dp"
